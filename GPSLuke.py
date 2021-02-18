@@ -120,4 +120,4 @@ while True:
   print ("Start sending Position ...")
   SendGPSPosition()
   lastmessage = 'Stop'
-      #time.sleep(900)
+    
