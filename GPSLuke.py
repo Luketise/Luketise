@@ -51,7 +51,7 @@ VerticalDelta = 2.         # Send position if it moves vertically by at least th
 changeXYZ = 0
 
 # Set mobile number here
-MobileNumber = "+393480348015"
+MobileNumber = "+39xxxxxxxxx" #  Set here mobile number
 
 print ("Booting modem ...")
 gsm = GsmModem(port="/dev/ttyS0")
