@@ -54,7 +54,7 @@ changeXYZ = 0
 MobileNumber = "+39xxxxxxxxx" #  Set here mobile number
 
 print ("Booting modem ...")
-gsm = GsmModem(port="/dev/ttyS0")
+gsm = GsmModem(port="/dev/ttyAMA0")  # try with ttyS0
 gsm.boot()
 
 print ("Modem details:")
