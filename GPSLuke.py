@@ -43,7 +43,7 @@ def SendGPSPosition():
 #  DEFINE GLOBAL VARIABLES
 #----------------------------------------------------------------------
 SendTimeout = 5.           # Send position every x minutes regardless of movement
-HorizontalDelta = 3.      # Send position if it moves horizontally by at least this many metres
+HorizontalDelta = 10.      # Send position if it moves horizontally by at least this many metres
 VerticalDelta = 2.         # Send position if it moves vertically by at least this many metres
 
 
@@ -102,7 +102,7 @@ while True:
   if text[0:5] == 'Check':
      print ("Controllo GPS...")
      SendGPSPosition()
-     Message = ' Position: ' + UTC + ', ' + str(Latitude) + ', ' + str(Longitude) + ', ' + str(Altitude) + ' http://maps.google.com/?q=' + str(Latitude) + ',' + str(Longitude)
+     Message = ' Check Position: ' + UTC + ', ' + str(Latitude) + ', ' + str(Longitude) + ', ' + str(Altitude) + ' http://maps.google.com/?q=' + str(Latitude) + ',' + str(Longitude)
      print ("Sending to mobile " + MobileNumber + ": " + Message)
      gsm.send_sms(MobileNumber, Message)
 
@@ -125,13 +125,13 @@ while True:
  
 #  calculate horizontal distance
      Distance = abs(CalculateDistance(float(Latitude), float(Longitude), PreviousLatitude, PreviousLongitude))
-     Message = ' Position: ' + UTC + ', ' + str(Latitude) + ', ' + str(Longitude) + ', ' + str(Altitude) + ' http://maps.google.com/?q=' + str(Latitude) + ',' + str(Longitude)
+     Message = ' Modify Position: ' + UTC + ', ' + str(Latitude) + ', ' + str(Longitude) + ', ' + str(Altitude) + ' http://maps.google.com/?q=' + str(Latitude) + ',' + str(Longitude)
 
      if Distance >= HorizontalDelta:
         SendGPSPosition()
         changeXYZ = 1    
         print ("Inviato per spostamento orizzontale al numero " + MobileNumber + ": " + Message)
-#       gsm.send_sms(MobileNumber, Message)        
+        gsm.send_sms(MobileNumber, Message)        
 
      if abs(float(Altitude) - PreviousAltitude) >= VerticalDelta:
         SendGPSPosition()
