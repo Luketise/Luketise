@@ -3,6 +3,17 @@ import math
 import sys
 from pygsm import GsmModem
 
+import RPi.GPIO as GPIO  # Switch on GPRS hat
+GPIO.setmode(GPIO.BOARD)   
+GPIO.setup(7, GPIO.OUT)
+while True:
+	   GPIO.output(7, GPIO.LOW)
+	   time.sleep(4)
+	   GPIO.output(7, GPIO.HIGH)
+	   break
+GPIO.cleanup()
+time.sleep(60)
+
 
 def CalculateDistance(Latitude1, Longitude1, Latitude2, Longitude2):
  Latitude1 = Latitude1 * math.pi / 180
@@ -75,6 +86,9 @@ gsm.query("AT+CMGD=1,4")
 print
 
 SwitchGPSon()
+time.sleep(90)  # waiting to receive satellites
+
+SwitchGPSon()   # Trick to start again to reive position 
 
 # ricava posizione iniziale
 SendGPSPosition()
