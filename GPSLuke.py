@@ -54,7 +54,7 @@ def SendGPSPosition():
 #  DEFINE GLOBAL VARIABLES
 #----------------------------------------------------------------------
 SendTimeout = 5.           # Send position every x minutes regardless of movement
-HorizontalDelta = 10.      # Send position if it moves horizontally by at least this many metres
+HorizontalDelta = 20.      # Send position if it moves horizontally by at least this many metres
 VerticalDelta = 2.         # Send position if it moves vertically by at least this many metres
 
 
@@ -139,7 +139,7 @@ while True:
  
 #  calculate horizontal distance
      Distance = abs(CalculateDistance(float(Latitude), float(Longitude), PreviousLatitude, PreviousLongitude))
-     Message = ' Modify Position: ' + UTC + ', ' + str(Latitude) + ', ' + str(Longitude) + ', ' + str(Altitude) + ' http://maps.google.com/?q=' + str(Latitude) + ',' + str(Longitude)
+     Message = ' Position: ' + UTC + ', ' + str(Latitude) + ', ' + str(Longitude) + ', ' + str(Altitude) + ' http://maps.google.com/?q=' + str(Latitude) + ',' + str(Longitude)
 
      if Distance >= HorizontalDelta:
         SendGPSPosition()
